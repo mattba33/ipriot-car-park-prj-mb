@@ -1,0 +1,2 @@
+class Carpark:
+    pass
