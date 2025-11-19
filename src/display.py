@@ -4,5 +4,9 @@ class Display:
         self.message = message
         self.is_on = is_on
 
+    def update(self, data):
+        for key, value in data.items():
+            print(f"{key}: {value}")
+
     def __str__(self):
         return f"Display {self.id}: {self.message}"
