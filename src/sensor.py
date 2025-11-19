@@ -5,11 +5,11 @@ class Sensor:
         self.car_park = car_park
 
     def __str__(self):
-        return f"Sensor {self.id}:active = {self.is_active} carpark = {self.car_park}"
+        return f"Sensor {self.id}:active = {self.is_active} car park={self.car_park}"
 
 class EntrySensor(Sensor):
     def __str__(self):
-        return f"EntrySensor {self.id}, active={self.is_active}, car_park={self.car_park})"
+        return f"EntrySensor {self.id}, active={self.is_active}, car park={self.car_park})"
 class ExitSensor(Sensor):
     def __str__(self):
-        return f"ExitSensor {self.id}, active={self.is_active}, car_park={self.car_park})"
+        return f"ExitSensor {self.id}, active={self.is_active}, car park={self.car_park})"
