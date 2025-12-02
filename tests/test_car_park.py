@@ -40,5 +40,12 @@ class TestCarPark(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.car_park.remove_car("NO-1")
 
+    def test_register_raises_type_error(self):
+        car_park = CarPark(location="Perth", capacity=100)
+        invalid_input = "NotACarParkObject"
+
+        with self.assertRaises(TypeError):
+            self.car_park.register(invalid_input)
+
 if __name__ == "__main__":
     unittest.main()
