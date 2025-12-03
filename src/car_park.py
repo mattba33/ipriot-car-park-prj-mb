@@ -1,14 +1,27 @@
 from .display import Display
 from .sensor import Sensor
+from pathlib import Path
 
 
 class CarPark:
-    def __init__(self, location, capacity, plates=None, displays=None, sensors=None):
+    def __init__(self, location, capacity, plates=None, displays=None, sensors=None, log_file=None):
         self.location = location
         self.capacity = capacity
         self.displays = displays if displays is not None else []
         self.plates = plates if plates is not None else []
         self.sensors = sensors if sensors is not None else []
+
+        if log_file is None:
+            self.log_file = Path("log.txt")
+        else:
+            self.log_file = Path(log_file)
+
+        self.log_file.touch(exist_ok=True)
+
+    def _log(self, plate, action):
+        with self.log_file.open("a") as file:
+            file.write(f"{plate} {action}\n")
+            file.flush()
 
     def register(self, component):
         if not isinstance(component, (Sensor, Display)):
@@ -29,12 +42,14 @@ class CarPark:
     def add_car(self, plate):
         if len(self.plates) < self.capacity and plate not in self.plates:
             self.plates.append(plate)
+            self._log(plate, "entered")
 
         self.update_displays()
 
     def remove_car(self, plate):
         if plate in self.plates:
             self.plates.remove(plate)
+            self._log(plate, "exited")
         elif len(self.plates) >= self.capacity:
             pass
         else:

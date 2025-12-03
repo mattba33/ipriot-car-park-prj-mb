@@ -1,5 +1,6 @@
 import random
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+
 
 class Sensor:
     def __init__(self, id, car_park, is_active=False,):
