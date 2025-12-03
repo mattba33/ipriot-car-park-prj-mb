@@ -5,17 +5,8 @@ from src.display import Display
 
 class TestDisplay(unittest.TestCase):
     def setUp(self):
-        self.car_park = CarPark(
-            location="Perth",
-            capacity=100
-            )
-
-        self.display = Display(
-            id=1,
-            message="Welcome to the car park",
-            is_on=True,
-            car_park=self.car_park
-        )
+        self.car_park = CarPark(location="Perth", capacity=100)
+        self.display = Display(id=1, message="Welcome to the car park", is_on=True, car_park=self.car_park)
 
     def test_display_initialized_with_all_attributes(self):
         self.assertIsInstance(self.display, Display)

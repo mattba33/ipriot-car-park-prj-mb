@@ -5,20 +5,9 @@ from src.sensor import EntrySensor, ExitSensor
 
 class SensorTest(unittest.TestCase):
     def setUp(self):
-        self.car_park = CarPark(
-            location="Perth",
-            capacity=100
-        )
-        self.entry_sensor = EntrySensor(
-            id=1,
-            is_active=True,
-            car_park=self.car_park
-        )
-        self.exit_sensor = ExitSensor(
-            id=2,
-            is_active=True,
-            car_park=self.car_park
-        )
+        self.car_park = CarPark(location="Perth", capacity=100)
+        self.entry_sensor = EntrySensor(id=1, is_active=True, car_park=self.car_park)
+        self.exit_sensor = ExitSensor(id=2, is_active=True, car_park=self.car_park)
 
     def test_entry_sensor(self):
         initial_bays = self.car_park.available_bays
