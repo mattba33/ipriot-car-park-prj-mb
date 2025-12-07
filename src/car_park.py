@@ -1,6 +1,7 @@
-from .display import Display
-from .sensor import Sensor
+from src.display import Display
+from src.sensor import Sensor
 from pathlib import Path
+from datetime import datetime
 
 
 class CarPark:
@@ -20,7 +21,7 @@ class CarPark:
 
     def _log(self, plate, action):
         with self.log_file.open("a") as file:
-            file.write(f"{plate} {action}\n")
+            file.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
             file.flush()
 
     def register(self, component):
@@ -42,6 +43,7 @@ class CarPark:
     def add_car(self, plate):
         if len(self.plates) < self.capacity and plate not in self.plates:
             self.plates.append(plate)
+            self.update_displays()
             self._log(plate, "entered")
 
         self.update_displays()
