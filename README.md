@@ -1,15 +1,19 @@
-# North Metro Software Python Project Template
+# Title: ipriot-car-park-prj-mb
 
-A Python project template for all new projects in North Metro Software
+# Description:
+# Car park system using Object-Oriented Programming concepts in Python.
 
-You may use the guidelines under `org/` for assessments and projects in the IP4RIoT cluster.
+# Setup:
+# Download file, run main,
 
-## Additional Examples
-Here are other good examples of onboarding documents that relate to git and version control for you to browse:
+# Usage:
+# Edit main to change amount of cars to enter or exit
+# To run test go into tests directory, then select the desired test to run
 
-- [skybase](https://handbook.skybase.com.np/git-conventions/)
-- [thoughtbot](https://github.com/thoughtbot/guides/tree/main/git) (also see their excellent [code review](https://github.com/thoughtbot/guides/tree/main/code-review) guide!)
-- [GitLab Handbook](https://handbook.gitlab.com/handbook/product-development-flow/)
+# Contribute:
+# To contribute to this file please download the project from this link https://github.com/mattba33/ipriot-car-park-prj-mb
 
-# Note
-When using this repo as a template, you should update this readme to provide a general overview suitable for **YOUR** project.
+# Output (Evidence)
+
+![Main.py output](screenshots/main_output1.png)
+![Main.py output](screenshots/main_output2.png)
