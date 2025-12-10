@@ -8,6 +8,7 @@ class Sensor:
         self.is_active = is_active
         self.car_park = car_park
 
+    # Sensor Functions
     @abstractmethod
     def update_car_park(self, plate):
         pass
@@ -25,9 +26,11 @@ class Sensor:
 
 
 class EntrySensor(Sensor):
+    # Entry Sensor Functions
+
     def update_car_park(self, plate):
-        self.car_park.add_car(plate)
         print(f"Incoming vehicle detected. Plate: {plate}")
+        self.car_park.add_car(plate)
 
     def __str__(self):
         return (f"EntrySensor {self.id}, "
@@ -36,9 +39,11 @@ class EntrySensor(Sensor):
 
 
 class ExitSensor(Sensor):
+    # Exit Sensor Functions
+
     def update_car_park(self, plate):
-        self.car_park.remove_car(plate)
         print(f"Outgoing vehicle detected. Plate: {plate}")
+        self.car_park.remove_car(plate)
 
     def scan_plate(self):
         return random.choice(self.car_park.plates)

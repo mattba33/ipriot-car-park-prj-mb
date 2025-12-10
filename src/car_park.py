@@ -2,6 +2,7 @@ from src.display import Display
 from src.sensor import Sensor
 from pathlib import Path
 from datetime import datetime
+import json
 
 
 class CarPark:
@@ -19,10 +20,43 @@ class CarPark:
 
         self.log_file.touch(exist_ok=True)
 
+    # Car park Functions
     def _log(self, plate, action):
+        """
+            Logs a vehicle action to the log file with a timestamp.
+
+            This method appends a new line to the log file in the format:
+            "<plate> <action> at <YYYY-MM-DD HH:MM:SS>"
+
+            Parameters
+            ----------
+            plate : str
+                The license plate of the vehicle.
+            action : str
+                The action performed by the vehicle (e.g., "entered", "exited").
+
+            Returns
+            -------
+            None
+            """
         with self.log_file.open("a") as file:
             file.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
             file.flush()
+
+    def write_config(self, filename="config.json"):
+        with open(filename, "w") as f:
+            json.dump({
+                "location": self.location,
+                "capacity": self.capacity,
+                "log_file": str(self.log_file)
+            }, f)
+
+    @classmethod
+    def from_config(cls, config_file=Path("config.json")):
+        config_file = config_file if isinstance(config_file, Path) else Path(config_file)
+        with config_file.open() as file:
+            config = json.load(file)
+        return cls(config["location"], config["capacity"], log_file=config["log_file"])
 
     def register(self, component):
         if not isinstance(component, (Sensor, Display)):
@@ -33,10 +67,12 @@ class CarPark:
             self.displays.append(component)
 
     def update_displays(self):
-        data = {"available_bays": self.available_bays,
+        data = {
+                "available_bays": self.available_bays,
                 "Location": self.location,
                 "temperature": 25
                 }
+
         for display in self.displays:
             display.update(data)
 
@@ -45,8 +81,6 @@ class CarPark:
             self.plates.append(plate)
             self.update_displays()
             self._log(plate, "entered")
-
-        self.update_displays()
 
     def remove_car(self, plate):
         if plate in self.plates:
